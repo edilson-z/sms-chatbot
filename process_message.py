@@ -1,9 +1,11 @@
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
+from LLM.generate_response import generate_response
 
 app = Flask(__name__)
 
 @app.route("/sms", methods=['GET', 'POST'])
+
 def incoming_sms():
     """Send a dynamic reply to an incoming text message"""
     # Get the message the user sent our Twilio number
@@ -17,6 +19,9 @@ def incoming_sms():
         resp.message("Hi!")
     elif body == 'bye':
         resp.message("Goodbye")
+    else: 
+        #Calls the generate_response function to make a response using gpt-3.5-turbo
+        resp.message(generate_response(body))
 
     return str(resp)
 
