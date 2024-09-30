@@ -5,25 +5,26 @@ from LLM.generate_response import generate_response
 app = Flask(__name__)
 
 @app.route("/sms", methods=['GET', 'POST'])
-
 def incoming_sms():
     """Send a dynamic reply to an incoming text message"""
     # Get the message the user sent our Twilio number
     body = request.values.get('Body', None)
 
     # Start our TwiML response
-    resp = MessagingResponse()
+    response = MessagingResponse()
 
     # Determine the right reply for this message
     if body == 'hello':
-        resp.message("Hi!")
+        # Add a message
+        response.message("Hi!")
     elif body == 'bye':
-        resp.message("Goodbye")
+        # Add a message
+        response.message("Goodbye")
     else: 
         #Calls the generate_response function to make a response using gpt-3.5-turbo
-        resp.message(generate_response(body))
+        response.message(generate_response(body))
 
-    return str(resp)
+    return str(response)
 
 if __name__ == "__main__":
     app.run(debug=True)
