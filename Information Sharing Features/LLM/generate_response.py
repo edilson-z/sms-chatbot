@@ -1,6 +1,9 @@
+import os
+from dotenv import load_dotenv
 from openai import OpenAI
 
-api_key = "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"
+load_dotenv()
+api_key = os.environ['OPEN_AI_API_KEY']
 
 def generate_response(input): 
     client = OpenAI(api_key=api_key)
@@ -19,4 +22,4 @@ def generate_response(input):
     return response_content
     pass
 
-# print(generate_response("Who are you?"))
+print(generate_response("How much are potatoes sold?"))
