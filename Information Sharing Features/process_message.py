@@ -14,12 +14,12 @@ def incoming_sms():
     response = MessagingResponse()
 
     # Determine the right reply for this message
-    if body == 'hello':
+    if body.lower() == 'hello':
         # Add a message
-        response.message("Hi!")
-    elif body == 'bye':
+        response.message("Hello! How can I assist you today?")
+    elif body.lower() == 'bye':
         # Add a message
-        response.message("Goodbye")
+        response.message("Have a nice day!")
     else: 
         #Calls the generate_response function to make a response using gpt-3.5-turbo
         response.message(generate_response(body))
