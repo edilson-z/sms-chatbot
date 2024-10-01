@@ -20,6 +20,5 @@ def generate_response(input):
     response_content = completion.choices[0].message.content.strip()
 
     return response_content
-    pass
 
-print(generate_response("How much are potatoes sold?"))
+# print(generate_response("How much are potatoes sold?"))
