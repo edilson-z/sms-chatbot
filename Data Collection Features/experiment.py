@@ -18,9 +18,6 @@ def survey_client():
         "What are your challenges? (Please be as detailed as possible)"
     ]
 
-    # Variable to initiate the loop
-    run = True
-
     # Variable to store user responses
     responses_list = {}
 
@@ -33,12 +30,11 @@ def survey_client():
     if 'yes' in body.lower():
         response.message("Thank you for taking interest in improving agriculture in Namibia!")
 
-        while run: 
-            for question in questions_list:
-                response.message(question)
+        for question in questions_list:
+            response.message(question)
 
-                responses_list[question] = body.lower()
-            run = False
+            responses_list[question] = body.lower()
+              
     else: 
         response.message("Have an amazing day!")
 
