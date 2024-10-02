@@ -18,10 +18,13 @@ auth_token = os.environ["TWILIO_AUTH_TOKEN"]
 
 client = Client(account_sid, auth_token)
 
+bot_phone = "+12028836616"
+client_phone = "+264818779053"
+
 message = client.messages.create(
-    body="This is the ship that made the Kessel Run in fourteen parsecs?",
-    from_="+12028836616",
-    to="+264818779053",
+    body="Hello! I am a data collection bot for the agricultural industry in Namibia. Do you have 5 minutes to answer questions to help the agricultural sector?",
+    from_=bot_phone,
+    to=client_phone,
 )
 
 print(message.body)
