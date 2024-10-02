@@ -10,27 +10,22 @@ questions_list = [
     "What are your challenges? (Please be as detailed as possible)"
 ]
 
-# Variable to initiate the loop
-run = True
-
 # Variable to start the conversation with the user
 conversation_starter = input("Hello! I am a data collection bot for the agricultural industry in Namibia. Do you have 5 minutes to answer questions to help the agricultural sector?")
 
 # Variable to store user responses
 responses_list = {}
 
-
 if conversation_starter.lower() == "yes":
     print("Thank you for taking interest in improving Namibia")
 
-    while run: 
-        for question in questions_list:
-            print(question)
-            response = input()
-            responses_list[question] = response
-           
-        print("Thank you for participation in the survey!\n\nYour feedback has been logged and will be used to improve aids efforts across Namibia.")
-        run = False
+    for question in questions_list:
+        print(question)
+        response = input()
+        responses_list[question] = response
+        
+    print("Thank you for participation in the survey!\n\nYour feedback has been logged and will be used to improve aids efforts across Namibia.")
+
 else: 
     print("Have an amazing day!")
 
