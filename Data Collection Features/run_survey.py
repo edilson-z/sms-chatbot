@@ -2,11 +2,19 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, request, session
 from twilio.twiml.messaging_response import MessagingResponse
+from pymongo import MongoClient
+from data_processor import structure_survey_data
 
 load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ['FLASK_SESSION_SECRET']  
+
+# MongoDB setup
+MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
+client = MongoClient(MONGO_URI)
+db = client['EdilsonsProjects']  # database name
+surveys_collection = db['AgriBot_SMS_Data']  # collection name
 
 questions_list = [
     "What is your name?\n\n(Please provide only your name. Example: Edilson Zau)", 
@@ -54,7 +62,20 @@ def survey_client():
         if user_session['current_question'] < len(questions_list):
             resp.message(questions_list[user_session['current_question']])
         else:
-            resp.message("Thank you for completing the survey!")
+            # Structure and save the data to MongoDB
+            survey_data = structure_survey_data(
+                phone_number, 
+                user_session['responses'],
+                questions_list
+            )
+
+            try:
+                surveys_collection.insert_one(survey_data)
+                resp.message("Thank you for completing the survey! Your responses have been saved.")
+            except Exception as e:
+                print(f"Error saving to MongoDB: {e}")
+                resp.message("Thank you for completing the survey! However, there was an issue saving your responses.")
+
             print(user_session['responses'])  # Print responses to console
             # Here you could also save the responses to a database
             
@@ -69,6 +90,15 @@ def survey_client():
     session.modified = True
     
     return str(resp)
+
+# Utility route to check stored surveys (for development/testing)
+@app.route("/check-surveys", methods=['GET'])
+def check_surveys():
+    if not os.getenv('FLASK_DEBUG'):
+        return "Not available in production", 403
+    
+    surveys = list(surveys_collection.find({}, {'_id': 0}))
+    return {'surveys': surveys}
 
 if __name__ == "__main__":
     app.run(debug=True)
