@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "67208e32af224b1d581a8805"
+  },
+  "phone_number": "+264818779053",
+  "submission_date": {
+    "$date": "2024-10-29T07:26:42.818Z"
+  },
+  "personal_info": {
+    "name": "Edilson Zau",
+    "date_of_birth": "24 October 2003",
+    "contact": "+264818779053"
+  },
+  "location": {
+    "region": "Khomas",
+    "constituency": "Windhoek",
+    "raw_input": "Khomas, Windhoek"
+  },
+  "farming_details": {
+    "products": [
+      "Tomatoes",
+      "carrots and cabbage"
+    ],
+    "harvest_frequency": "3 Times a year",
+    "government_assistance": "No",
+    "nab_certified": false
+  },
+  "challenges": "My main challenge is getting the funds for growing the crops",
+  "raw_responses": {
+    "Are you certified by the Namibia Agronomic Board (NAB)? (Yes/No)": "No",
+    "Do you get any help from the Ministry of Agriculture Water and Land reform or any other institutions?": "No",
+    "How often do you harvest?\n\n(Example: 3 or 4 Times a year)": "3 Times a year",
+    "What do you farm?\n\n(Please provide only your produce. Example: Tomatoes, potatoes, onions, and spinach)": "Tomatoes, carrots and cabbage",
+    "What is your date of birth?\n\n(Please provide only your date of birth. Example: 12 November 1987)": "24 October 2003",
+    "What is your name?\n\n(Please provide only your name. Example: Edilson Zau)": "Edilson Zau",
+    "Where are you located?\n\n(Please provide your region and constituency. Example: Khomas, Windhoek)": "Khomas, Windhoek",
+    "What are your challenges? (Please be as detailed as possible)": "My main challenge is getting the funds for growing the crops"
+  }
+}]
